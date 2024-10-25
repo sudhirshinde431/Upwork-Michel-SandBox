@@ -1,0 +1,214 @@
+<div>
+ <nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <h2>Welcome {{ loginusermodel.givenName }} {{ loginusermodel.surname }}({{loginusermodel.userPrincipalName}}) </h2>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+   
+    </div>
+  </div>
+</nav>
+
+<div class="mainContent">
+<div class="row">
+<div><h5><p>Here is the information about all your vulnerability</p></h5></div> 
+  <div class="col-md-3 col-md-3 col-xs-12">
+    <div class="card" style="width: 100%">      
+      <div class="card-body">   
+        <span class="TileKeyNumber">{{loginuserOrganizational_Vulnerability.totalOwnedApp}}</span> <i  class="tileicon bi bi-menu-app"></i><br>
+        Total owened app
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-md-3 col-xs-12">
+    <div class="card" style="width: 100%">      
+      <div class="card-body">   
+        <span class="TileKeyNumber">{{loginuserOrganizational_Vulnerability.totalVulnerability}}</span> <i  class="tileicon bi-exclamation-triangle"></i> <br>
+        Total Vulnerable app
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-md-3 col-xs-12">
+    <div class="card" style="width: 100%">      
+      <div class="card-body">   
+        <span class="TileKeyNumber">{{loginuserOrganizational_Vulnerability.orphanedAsset}}</span><i class="tileicon bi bi-check2-square"></i>
+        <br>
+        Orphaned asset 
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-md-3 col-xs-12">
+    <div class="card" style="width: 100%">      
+      <div class="card-body">   
+        <span class="TileKeyNumber">{{loginuserOrganizational_Vulnerability.notification}}</span><i class="tileicon bi bi-chat-right-dots"></i> <br>
+        Notification
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div *ngIf="LoginUserId!=selectedusermodel.id"> <h5><p>App vulnerability of {{selectedusermodel.givenName}} {{selectedusermodel.surname}}</p></h5></div>
+  <div *ngIf="LoginUserId==selectedusermodel.id"><h5><p>App vulnerability</p></h5></div>
+ 
+  <div class="col-md-6 col-md-6 col-xs-12">
+    <div class="card card-chart">
+      <div class="card-title">
+        Total vulnerability</div>
+      <div class="card-body">       
+        <div id="chart" style="width:400px; height:400px;">
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [labels]="chartOptions.labels"
+            [responsive]="chartOptions.responsive"
+          ></apx-chart>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-md-6 col-xs-12">
+    <div class="card card-chart">
+      <div class="card-title">
+        Top 5 vulnerability</div>
+      <div class="card-body">       
+        <div id="chart" style="width:400px; height:400px;">
+          <apx-chart  
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [labels]="chartOptions.labels"
+            [responsive]="chartOptions.responsive"
+          ></apx-chart>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+ <div *ngIf="LoginUserId!=selectedusermodel.id"> <h5><p>Total direct reporting to {{selectedusermodel.givenName}} {{selectedusermodel.surname}}</p></h5></div>
+ <div *ngIf="LoginUserId==selectedusermodel.id"><h5><p>Total direct reporting</p></h5></div>
+  <div *ngFor="let model of directReportingList" class="col-md-3 col-md-3 col-xs-12">
+    <div class="card">
+      <div class="card-title" (click)="clickuser(model.id)">
+        {{model.givenName}} {{model.surname}} 
+        <br>
+        <h5> (
+        {{model.id}}:
+        {{model.jobTitle}})</h5> </div>
+      <div class="card-body">       
+        <p>Total own app - {{model.totalOwnedApp==null?0:model.totalOwnedApp}} </p>
+        <p>Total vulnerability - {{model.totalVulnerability==null?0:model.totalVulnerability}} </p>
+          <p>Orphaned asset - {{model.orphanedAsset==null?0:model.orphanedAsset}} </p>
+            <p>Notification - {{model.notification==null?0:model.notification}} </p>     
+      </div>
+    </div>
+  </div>
+  <div *ngIf="directReportingList.length<=0">No direct reporting</div>
+  <!-- <div class="col-md-4 col-md-4 col-xs-12">
+    <div class="card" style="width: 18rem">
+      <div class="card-title">Panel title</div>
+      <div class="card-body">
+        Some quick example text to build on the card title and make up the bulk
+        of the card's content.
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+  </div> -->
+</div>
+<!-- <nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <h1>Angular Bootstrap</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid py-3">
+  <div class="row my-3">
+    <div class="col">
+      <label for="exampleFormControlInput1" class="form-label">Email address</label>
+      <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" placeholder="name@example.com">
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col">
+      <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+      <textarea class="form-control form-control-sm" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col">
+      <button class="btn btn-sm btn-outline-primary" >Launch demo modal</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #demoModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="dateOfBirth">Date of birth</label>
+        <div class="input-group">
+          <input id="dateOfBirth" name="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker>
+          <button type="button" class="btn btn-outline-secondary bi bi-calendar" ></button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template> -->
+
+</div>
+
+</div>

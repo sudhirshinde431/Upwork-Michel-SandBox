@@ -1,0 +1,14 @@
+<my-sidebar *ngIf="!isLoggedIn()" [isExpanded]="sidebarExpanded" (toggleSidebar)="sidebarExpanded = !sidebarExpanded"></my-sidebar>
+
+<div class="content" [ngClass]="{ 'sidebarExpanded': sidebarExpanded }">
+  <table>
+    <tr>
+      <td><button (click)="Validateuser()" *ngIf="!isLoggedIn()" #myDiv id="myDiv">SIGN IN</button></td>      
+    </tr>
+  </table>
+  <div >
+    <router-outlet></router-outlet>
+  </div>
+ 
+</div>
+

@@ -1,0 +1,59 @@
+.card{
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    border-color: #ddd;
+}
+.tileicon
+{
+    float: right;
+    color: green;
+    font-size: xx-large;
+}
+
+.mainContent
+{
+    padding: 15px;
+}
+.TileKeyNumber
+{
+    font-weight: 600;
+}
+.card-chart
+{
+    min-height: 200px;
+    min-width: 200px;
+    height: 400px !important;
+    /* width: 450px !important; */
+
+
+}
+.card-title
+{
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #1d5704;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    font-size: larger;
+    font-weight: 700;
+    
+}
+
+.DisplayNone{
+display: none;
+}
+.card-body{
+    padding: 15px;
+}
+
+.card-title h5{
+    margin: 0px !important;
+    display: inline;
+    font-size: 12px;
+}
