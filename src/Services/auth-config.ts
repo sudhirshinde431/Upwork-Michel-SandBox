@@ -6,6 +6,7 @@ export const msalConfig: Configuration = {
     clientId: '10db189e-8288-4ef1-875e-8a6fab5f82dd', // Replace with your client ID
     authority: 'https://login.microsoftonline.com/6668e656-39be-40ba-8dcd-dfcde2cf7d0c', // Replace with your tenant ID
     redirectUri: 'http://localhost:4200', // Replace with your redirect URI
+    
   },
   cache: {
     cacheLocation: 'localStorage',
